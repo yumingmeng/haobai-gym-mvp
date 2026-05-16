@@ -1,0 +1,124 @@
+{
+  "gym": {
+    "name": "浩柏健身",
+    "location": "河南省平顶山市新华区",
+    "demoCode": "123456"
+  },
+  "coaches": [
+    "陈教练",
+    "周教练",
+    "刘教练"
+  ],
+  "courseNames": [
+    "力量训练",
+    "体态矫正",
+    "燃脂训练",
+    "功能训练",
+    "私教复训"
+  ],
+  "students": [
+    {
+      "id": "stu_zhangyu",
+      "name": "张雨",
+      "phone": "13800010001",
+      "coach": "陈教练",
+      "cardType": "lesson",
+      "cardName": "私教 20 节卡",
+      "remainingLessons": 12,
+      "totalLessons": 20,
+      "expiresAt": "2026-08-31",
+      "createdAt": "2026-05-01T09:00:00.000Z"
+    },
+    {
+      "id": "stu_linke",
+      "name": "林可",
+      "phone": "13800010002",
+      "coach": "周教练",
+      "cardType": "lesson",
+      "cardName": "私教 10 节卡",
+      "remainingLessons": 2,
+      "totalLessons": 10,
+      "expiresAt": "2026-06-30",
+      "createdAt": "2026-05-03T10:20:00.000Z"
+    },
+    {
+      "id": "stu_wangchen",
+      "name": "王晨",
+      "phone": "13800010003",
+      "coach": "刘教练",
+      "cardType": "time",
+      "cardName": "月卡",
+      "remainingLessons": null,
+      "totalLessons": null,
+      "expiresAt": "2026-05-23",
+      "createdAt": "2026-05-05T12:30:00.000Z"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "sch_zhangyu_next",
+      "studentId": "stu_zhangyu",
+      "startsAt": "2026-05-18T19:00:00+08:00",
+      "courseName": "力量训练",
+      "coach": "陈教练",
+      "location": "A 区力量训练区",
+      "note": ""
+    },
+    {
+      "id": "sch_linke_next",
+      "studentId": "stu_linke",
+      "startsAt": "2026-05-17T18:30:00+08:00",
+      "courseName": "增肌",
+      "coach": "周教练",
+      "location": "B 区私教室",
+      "note": ""
+    },
+    {
+      "id": "sch_wangchen_next",
+      "studentId": "stu_wangchen",
+      "startsAt": "2026-05-20T20:00:00+08:00",
+      "courseName": "燃脂训练",
+      "coach": "刘教练",
+      "location": "C 区有氧区",
+      "note": ""
+    }
+  ],
+  "records": [
+    {
+      "id": "rec_zhangyu_1",
+      "studentId": "stu_zhangyu",
+      "usedLessons": 1,
+      "at": "2026-05-14T19:00:00+08:00",
+      "courseName": "下肢力量",
+      "coach": "陈教练",
+      "note": "深蹲 4 组，硬拉 3 组，核心稳定训练；体重 62.4kg。"
+    },
+    {
+      "id": "rec_zhangyu_2",
+      "studentId": "stu_zhangyu",
+      "usedLessons": 1,
+      "at": "2026-05-10T10:00:00+08:00",
+      "courseName": "上肢力量",
+      "coach": "陈教练",
+      "note": "卧推技术调整，划船 4 组，肩胛控制练习。"
+    },
+    {
+      "id": "rec_linke_1",
+      "studentId": "stu_linke",
+      "usedLessons": 1,
+      "at": "2026-05-15T18:30:00+08:00",
+      "courseName": "体态矫正",
+      "coach": "周教练",
+      "note": "肩颈放松，髋屈肌拉伸，弹力带激活训练。"
+    },
+    {
+      "id": "rec_wangchen_1",
+      "studentId": "stu_wangchen",
+      "usedLessons": 0,
+      "at": "2026-05-13T20:00:00+08:00",
+      "courseName": "燃脂循环",
+      "coach": "刘教练",
+      "note": "椭圆机热身 10 分钟，循环训练 5 轮，心率控制良好。"
+    }
+  ]
+}

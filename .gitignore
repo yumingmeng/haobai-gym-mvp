@@ -1,0 +1,7 @@
+node_modules/
+*.log
+.env
+tools/
+static-demo/
+gh-device-poll.ps1
+gh-device-status.txt

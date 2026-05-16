@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+*.log
+tools
+static-demo
+gh-device-poll.ps1
+gh-device-status.txt
+.git
+.gitignore
+.env

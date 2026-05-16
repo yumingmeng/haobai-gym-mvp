@@ -1,0 +1,12 @@
+{
+  "name": "gym-student-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gym student web MVP for coach demo.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
