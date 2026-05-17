@@ -298,7 +298,6 @@ function renderHome() {
     <main class="screen home-screen">
       <section class="brand-hero">
         <div class="hero-copy">
-          <p class="eyebrow">${escapeHtml(state.db.gym.location)}</p>
           <h1>${escapeHtml(state.db.gym.name)}</h1>
           <p class="hero-tagline">科学训练 · 私教指导 · 长期跟踪</p>
         </div>
@@ -374,7 +373,6 @@ function renderEnvironment() {
     <main class="screen">
       ${header("训练环境", { back: "home" })}
       <section class="intro-panel">
-        <p class="eyebrow">河南省平顶山市新华区</p>
         <h2>真实空间展示，让会员先看见训练发生的地方。</h2>
       </section>
       <section class="scene-gallery">

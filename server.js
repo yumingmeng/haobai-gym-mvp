@@ -34,7 +34,7 @@ function seedData() {
   return {
     gym: {
       name: "浩柏健身",
-      location: "河南省平顶山市新华区",
+      location: "",
       demoCode: "123456"
     },
     coaches: ["陈教练", "周教练", "刘教练"],
