@@ -13,6 +13,53 @@ const cardTypeLabel = {
   time: "时间卡"
 };
 
+const coachProfiles = [
+  {
+    name: "陈教练",
+    role: "力量训练 / 体态调整",
+    photo: "/assets/coach-chen.jpg",
+    bio: "专注基础力量、动作模式建立和私教会员长期训练规划。",
+    achievements: ["国家职业健身教练认证", "8 年私教训练经验", "多名会员完成体态与围度改善"]
+  },
+  {
+    name: "周教练",
+    role: "增肌塑形 / 训练陪跑",
+    photo: "/assets/coach-zhou.jpg",
+    bio: "擅长根据会员目标拆解周期计划，控制训练节奏和恢复质量。",
+    achievements: ["健美赛事备赛指导经验", "私教课程交付 3000+ 节", "会员训练档案管理负责人"]
+  },
+  {
+    name: "刘教练",
+    role: "燃脂训练 / 功能训练",
+    photo: "/assets/coach-liu.jpg",
+    bio: "关注心肺、力量和身体控制能力的综合提升，适合减脂与体能目标。",
+    achievements: ["功能性训练认证", "团课与私教双线经验", "擅长阶段性训练反馈跟进"]
+  }
+];
+
+const gymScenes = [
+  {
+    title: "力量训练区",
+    image: "/assets/env-strength.jpg",
+    text: "自由力量与固定器械结合，满足增肌、塑形和基础力量训练。"
+  },
+  {
+    title: "器械细节",
+    image: "/assets/env-equipment.jpg",
+    text: "器械区域保持清晰分区，方便教练带训和会员独立训练。"
+  },
+  {
+    title: "私教训练空间",
+    image: "/assets/env-studio.jpg",
+    text: "适合体态调整、功能训练和一对一动作技术纠正。"
+  },
+  {
+    title: "会员训练动线",
+    image: "/assets/training-space.jpg",
+    text: "从热身、主训练到拉伸恢复，形成完整训练体验。"
+  }
+];
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -94,6 +141,20 @@ function formatDate(value) {
     month: "2-digit",
     day: "2-digit"
   }).format(new Date(`${value}T00:00:00+08:00`));
+}
+
+function formatRecordDate(value) {
+  if (!value) return { day: "--", month: "--", time: "--" };
+  const date = new Date(value);
+  return {
+    day: String(date.getDate()).padStart(2, "0"),
+    month: String(date.getMonth() + 1).padStart(2, "0"),
+    time: new Intl.DateTimeFormat("zh-CN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }).format(date)
+  };
 }
 
 function toDateTimeInput(value) {
@@ -234,26 +295,104 @@ function header(title, options = {}) {
 
 function renderHome() {
   return `
-    <main class="screen">
-      <section class="home-head">
-        <p class="eyebrow">${escapeHtml(state.db.gym.location)}</p>
-        <h1>${escapeHtml(state.db.gym.name)}</h1>
-        <p>课时、排课和训练记录演示台</p>
+    <main class="screen home-screen">
+      <section class="brand-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">${escapeHtml(state.db.gym.location)}</p>
+          <h1>${escapeHtml(state.db.gym.name)}</h1>
+          <p class="hero-tagline">科学训练 · 私教指导 · 长期跟踪</p>
+        </div>
+        <div class="hero-image" aria-label="浩柏健身门店实景"></div>
       </section>
 
-      <section class="entry-grid">
-        <button class="entry-card student-entry" type="button" data-action="go" data-target="student-login">
-          <span class="entry-icon">学</span>
-          <strong>学员端</strong>
-          <small>查看下次上课、剩余课时和训练记录</small>
+      <section class="home-feature-grid" aria-label="品牌展示入口">
+        <button class="home-feature-card" type="button" data-action="go" data-target="coaches">
+          <span class="feature-image" style="background-image:url('/assets/coach-zhou.jpg')"></span>
+          <span class="feature-card-body">
+            <span>教练团队</span>
+            <strong>查看全部教练</strong>
+            <small>照片、简介与专业经历</small>
+          </span>
         </button>
-        <button class="entry-card coach-entry" type="button" data-action="go" data-target="admin">
-          <span class="entry-icon">教</span>
-          <strong>教练后台</strong>
-          <small>维护学员、排课、扣课和训练备注</small>
+        <button class="home-feature-card" type="button" data-action="go" data-target="environment">
+          <span class="feature-image" style="background-image:url('/assets/env-strength.jpg')"></span>
+          <span class="feature-card-body">
+            <span>训练环境</span>
+            <strong>查看现场照片</strong>
+            <small>空间、器械与训练细节</small>
+          </span>
         </button>
       </section>
+
+      <nav class="home-dock" aria-label="角色入口">
+        <button class="dock-action dock-primary" type="button" data-action="go" data-target="student-login">
+          <span>进入学员端</span>
+          <strong>查看上课、课时和训练档案</strong>
+        </button>
+        <button class="dock-action" type="button" data-action="go" data-target="admin">
+          <span>教练后台</span>
+          <strong>课程与会员管理</strong>
+        </button>
+      </nav>
     </main>
+  `;
+}
+
+function renderCoaches() {
+  return `
+    <main class="screen">
+      ${header("教练团队", { back: "home" })}
+      <section class="intro-panel">
+        <p class="eyebrow">浩柏健身</p>
+        <h2>专业教练，不只带练，也负责长期跟踪。</h2>
+      </section>
+      <section class="coach-profile-list">
+        ${coachProfiles.map(renderCoachProfile).join("")}
+      </section>
+    </main>
+  `;
+}
+
+function renderCoachProfile(coach) {
+  return `
+    <article class="coach-profile-card">
+      <div class="coach-photo" style="background-image:url('${escapeHtml(coach.photo)}')"></div>
+      <div class="coach-info">
+        <p class="eyebrow">${escapeHtml(coach.role)}</p>
+        <h2>${escapeHtml(coach.name)}</h2>
+        <p>${escapeHtml(coach.bio)}</p>
+        <div class="achievement-list">
+          ${coach.achievements.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderEnvironment() {
+  return `
+    <main class="screen">
+      ${header("训练环境", { back: "home" })}
+      <section class="intro-panel">
+        <p class="eyebrow">河南省平顶山市新华区</p>
+        <h2>真实空间展示，让会员先看见训练发生的地方。</h2>
+      </section>
+      <section class="scene-gallery">
+        ${gymScenes.map(renderGymScene).join("")}
+      </section>
+    </main>
+  `;
+}
+
+function renderGymScene(scene) {
+  return `
+    <article class="scene-card">
+      <div class="scene-photo" style="background-image:url('${escapeHtml(scene.image)}')"></div>
+      <div>
+        <h2>${escapeHtml(scene.title)}</h2>
+        <p>${escapeHtml(scene.text)}</p>
+      </div>
+    </article>
   `;
 }
 
@@ -356,15 +495,35 @@ function renderStudentDashboard(studentId) {
 
       <section class="card">
         <div class="section-title">
-          <h2>最近训练记录</h2>
+          <h2>训练成长档案</h2>
         </div>
         ${
           records.length
-            ? `<div class="record-list">${records.map(renderRecordItem).join("")}</div>`
+            ? `<div class="training-timeline">${records.map(renderTimelineRecord).join("")}</div>`
             : `<div class="empty-inline">暂无训练记录</div>`
         }
       </section>
     </main>
+  `;
+}
+
+function renderTimelineRecord(record) {
+  const date = formatRecordDate(record.at);
+  return `
+    <article class="timeline-item">
+      <div class="timeline-date">
+        <strong>${escapeHtml(date.day)}</strong>
+        <span>${escapeHtml(date.month)}月</span>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-head">
+          <strong>${escapeHtml(record.courseName)}</strong>
+          <span>${escapeHtml(date.time)}</span>
+        </div>
+        <p>${escapeHtml(record.note)}</p>
+        <small>${escapeHtml(record.coach)}${record.usedLessons ? ` · 扣 ${record.usedLessons} 节` : ""}</small>
+      </div>
+    </article>
   `;
 }
 
@@ -430,6 +589,14 @@ function renderAdmin() {
           </div>
         `
       })}
+
+      <section class="admin-brief">
+        <div>
+          <p class="eyebrow">会员服务管理台</p>
+          <h2>今日工作概览</h2>
+        </div>
+        <span>${escapeHtml(state.db.gym.name)}</span>
+      </section>
 
       <section class="admin-stats">
         ${statCard("学员", state.db.students.length)}
@@ -513,8 +680,8 @@ function renderAdminLogin() {
 function statCard(label, value) {
   return `
     <div class="stat-card">
-      <strong>${escapeHtml(value)}</strong>
       <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
     </div>
   `;
 }
@@ -727,6 +894,10 @@ function render() {
   let html = "";
   if (route === "student-login") {
     html = renderLogin();
+  } else if (route === "coaches") {
+    html = renderCoaches();
+  } else if (route === "environment") {
+    html = renderEnvironment();
   } else if (route.startsWith("student/")) {
     html = renderStudentDashboard(route.split("/")[1]);
   } else if (route === "admin") {
@@ -892,6 +1063,7 @@ window.addEventListener("hashchange", () => {
   state.error = "";
   state.modal = null;
   render();
+  window.scrollTo(0, 0);
 });
 
 loadData()
